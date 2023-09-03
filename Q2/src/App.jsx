@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import TrainCard from "./components/TrainCard";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [train, setTrain] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        console.log('use efffecting')
+        fetch("http://127.0.0.1:5000/api/auth").then((response) =>
+            response.json()
+        );
+        fetch("http://127.0.0.1:5000/api/trains")
+            .then((response) => response.json())
+            .then((data) => setTrain(data.trains));
+    }, []);
+
+    console.log(train);
+    return (
+        <>
+            <div></div>
+            <h1>Upcoming Trains</h1>
+            {train !== [] ? (
+                train.map((tr, index) => (
+                    <TrainCard key={index} train={tr} />
+                ))
+            ) : (
+                <h2>Loading...</h2>
+            )}
+        </>
+    );
 }
 
-export default App
+export default App;
