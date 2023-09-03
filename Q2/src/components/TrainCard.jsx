@@ -23,18 +23,18 @@ export default function TrainCard({trainNumber, trainName, departureTime, seatsA
                     </Typography>
                     <Button>
                         <Typography variant="h6" component="div">
-                            Departure Time: 12:00 (Delayed by {delayedBy} minutes)
+                            Departure Time: {departureTime} (Delayed by {delayedBy} minutes)
                         </Typography>
                     </Button>
                     <Typography variant="body2">
-                        {seatsAvailable} Sleeper Seats Available
+                        {seatsAvailable[0]} Sleeper Seats Available
                         <br />
-                        {seatsAvailable} AC Seats Available
+                        {seatsAvailable[1]} AC Seats Available
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Book Sleeper: INR {price}</Button>
-                    <Button size="small">Book AC: INR {price}</Button>
+                    <Button size="small">Book Sleeper: INR {price[0]}</Button>
+                    <Button size="small">Book AC: INR {price[1]}</Button>
                 </CardActions>
             </Card>
         </Box>
